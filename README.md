@@ -1,6 +1,6 @@
 # esp32-gameboy
 
-This is a port of https://github.com/zid/gameboy to the Espressif ESP32 chip. and this project based on Arduino,and the SPI LCD the low speed.
+This is a port of https://github.com/zid/gameboy to the Espressif ESP32 chip. and this project based on Arduino,and the SPI LCD the low speed.There's a better repo named Espeon(https://github.com/Ryuzaki-MrL/Espeon) used for M5STACK.
 
 # What do I need to use this?
 
