@@ -1,6 +1,7 @@
-#include "SPI.h"
 #include "Adafruit_GFX.h"
 #include "Adafruit_ST7735.h"
+#include "config.h"
+#include "SPI.h"
 
 #define TFT_CS -1
 #define TFT_DC 5
@@ -36,18 +37,41 @@ void SDL_Flip(byte *screen) {
 void sdl_init() {
   tft.initR(INITR_BLACKTAB);
   tft.setRotation(3);
-  tft.fillScreen(ST77XX_RED);
 
-  gpio_pad_select_gpio(GPIO_NUM_15);
-  gpio_set_direction(GPIO_NUM_15, GPIO_MODE_INPUT);
+  gpio_pad_select_gpio(BTN_START);
+  gpio_set_direction(BTN_START, GPIO_MODE_INPUT);
 
-  gpio_pad_select_gpio(GPIO_NUM_27);
-  gpio_set_direction(GPIO_NUM_27, GPIO_MODE_INPUT);
+  gpio_pad_select_gpio(BTN_SELECT);
+  gpio_set_direction(BTN_SELECT, GPIO_MODE_INPUT);
+
+  gpio_pad_select_gpio(BTN_A);
+  gpio_set_direction(BTN_A, GPIO_MODE_INPUT);
+
+  gpio_pad_select_gpio(BTN_B);
+  gpio_set_direction(BTN_B, GPIO_MODE_INPUT);
+
+  gpio_pad_select_gpio(BTN_UP);
+  gpio_set_direction(BTN_UP, GPIO_MODE_INPUT);
+
+  gpio_pad_select_gpio(BTN_DOWN);
+  gpio_set_direction(BTN_DOWN, GPIO_MODE_INPUT);
+
+  gpio_pad_select_gpio(BTN_LEFT);
+  gpio_set_direction(BTN_LEFT, GPIO_MODE_INPUT);
+
+  gpio_pad_select_gpio(BTN_RIGHT);
+  gpio_set_direction(BTN_RIGHT, GPIO_MODE_INPUT);
 }
 
 int sdl_update() {
-  button_start = !gpio_get_level(GPIO_NUM_15);
-  button_right = !gpio_get_level(GPIO_NUM_27);
+  button_start = !gpio_get_level(BTN_START);
+  button_select = !gpio_get_level(BTN_SELECT);
+  button_a = !gpio_get_level(BTN_A);
+  button_b = !gpio_get_level(BTN_B) ;
+  button_up = !gpio_get_level(BTN_UP);
+  button_down = !gpio_get_level(BTN_DOWN);
+  button_left = !gpio_get_level(BTN_LEFT);
+  button_right = !gpio_get_level(BTN_RIGHT);
 
 	return 0;
 }
