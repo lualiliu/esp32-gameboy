@@ -1,24 +1,21 @@
 #include <Arduino.h>
+
 #include "lcd.h"
 #include "cpu.h"
 #include "interrupt.h"
 #include "sdl.h"
 #include "mem.h"
 
-
 static int lcd_line;
 static int lcd_ly_compare;
 
-
-/* LCD STAT */
-static int ly_int;	/* LYC = LY coincidence interrupt enable */
+static int ly_int;
 static int mode2_oam_int;
 static int mode1_vblank_int;
 static int mode0_hblank_int;
 static int ly_int_flag;
 static int lcd_mode;
 
-/* LCD Control */
 static int lcd_enabled;
 static int window_tilemap_select;
 static int window_enabled;
@@ -33,6 +30,7 @@ static int window_x, window_y;
 static byte bgpalette[] = {3, 2, 1, 0};
 static byte sprpalette1[] = {0, 1, 2, 3};
 static byte sprpalette2[] = {0, 1, 2, 3};
+
 static unsigned long colours[4] = {0xFFFFFF, 0xC0C0C0, 0x808080, 0x000000};
 
 struct sprite {
@@ -46,14 +44,11 @@ enum {
 	PNUM  = 0x10
 };
 
-unsigned char lcd_get_stat(void)
-{
-
+unsigned char lcd_get_stat(void) {
 	return (ly_int)<<6 | lcd_mode;
 }
 
-void lcd_write_bg_palette(unsigned char n)
-{
+void lcd_write_bg_palette(unsigned char n) {
 	bgpalette[0] = (n>>0)&3;
 	bgpalette[1] = (n>>2)&3;
 	bgpalette[2] = (n>>4)&3;

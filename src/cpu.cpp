@@ -3,21 +3,20 @@
 #include "rom.h"
 #include "interrupt.h"
 
-#define set_HL(x) do {unsigned int macro = (x); c.L = macro&0xFF; c.H = macro>>8;} while(0)
-#define set_BC(x) do {unsigned int macro = (x); c.C = macro&0xFF; c.B = macro>>8;} while(0)
-#define set_DE(x) do {unsigned int macro = (x); c.E = macro&0xFF; c.D = macro>>8;} while(0)
-#define set_AF(x) do {unsigned int macro = (x); c.F = macro&0xFF; c.A = macro>>8;} while(0)
+#define set_HL(x) do { unsigned int macro = (x); c.L = macro & 0xFF; c.H = macro >> 8; } while(0)
+#define set_BC(x) do { unsigned int macro = (x); c.C = macro & 0xFF; c.B = macro >> 8; } while(0)
+#define set_DE(x) do { unsigned int macro = (x); c.E = macro & 0xFF; c.D = macro >> 8; } while(0)
+#define set_AF(x) do { unsigned int macro = (x); c.F = macro & 0xFF; c.A = macro >> 8; } while(0)
 
-#define get_AF() ((c.A<<8) | c.F)
-#define get_BC() ((c.B<<8) | c.C)
-#define get_DE() ((c.D<<8) | c.E)
-#define get_HL() ((c.H<<8) | c.L)
+#define get_AF() ((c.A << 8) | c.F)
+#define get_BC() ((c.B << 8) | c.C)
+#define get_DE() ((c.D << 8) | c.E)
+#define get_HL() ((c.H << 8) | c.L)
 
-/* Flags */
-#define set_Z(x) c.F = ((c.F&0x7F) | ((x)<<7))
-#define set_N(x) c.F = ((c.F&0xBF) | ((x)<<6))
-#define set_H(x) c.F = ((c.F&0xDF) | ((x)<<5))
-#define set_C(x) c.F = ((c.F&0xEF) | ((x)<<4))
+#define set_Z(x) c.F = ((c.F & 0x7F) | ((x) << 7))
+#define set_N(x) c.F = ((c.F & 0xBF) | ((x) << 6))
+#define set_H(x) c.F = ((c.F & 0xDF) | ((x) << 5))
+#define set_C(x) c.F = ((c.F & 0xEF) | ((x) << 4))
 
 #define flag_Z !!((c.F & 0x80))
 #define flag_N !!((c.F & 0x40))
@@ -46,117 +45,141 @@ static struct CPU c;
 static int is_debugged;
 static int halted;
 
-void cpu_init(void)
-{
+void cpu_init() {
 	set_AF(0x01B0);
 	set_BC(0x0013);
 	set_DE(0x00D8);
 	set_HL(0x014D);
+
 	c.SP = 0xFFFE;
 	c.PC = 0x0100;
 	c.cycles = 0;
 }
 
-static void RLC(unsigned char reg)
-{
+static void RLC(unsigned char reg) {
 	unsigned char t, old;
 
-	switch(reg)
-	{
-		case 0:	/* B */
-			old = !!(c.B&0x80);
+	switch(reg) {
+		case 0:
+			old = !!(c.B & 0x80);
 			c.B = (c.B << 1) | old;
+
 			set_C(old);
 			set_Z(!c.B);
-		break;
-		case 1:	/* C */
+			break;
+
+		case 1:
 			old = !!(c.C&0x80);
 			set_C(old);
+
 			c.C = c.C<<1 | old;
 			set_Z(!c.C);
-		break;
-		case 2:	/* D */
+			break;
+
+		case 2:
 			old = !!(c.D&0x80);
 			set_C(old);
+
 			c.D = c.D<<1 | old;
 			set_Z(!c.D);
-		break;
-		case 3:	/* E */
+			break;
+
+		case 3:
 			old = !!(c.E&0x80);
 			set_C(old);
+
 			c.E = c.E<<1 | old;
 			set_Z(!c.E);
-		break;
-		case 4:	/* H */
+			break;
+
+		case 4:
 			old = !!(c.H&0x80);
 			set_C(old);
+
 			c.H = c.H<<1 | old;
 			set_Z(!c.H);
-		break;
-		case 5:	/* L */
+			break;
+
+		case 5:
 			old = !!(c.L&0x80);
 			set_C(old);
+
 			c.L = c.L<<1 | old;
 			set_Z(!c.L);
-		break;
-		case 6:	/* (HL) */
+			break;
+
+		case 6:
 			t = mem_get_byte(get_HL());
 			old = !!(t&0x80);
 			set_C(old);
+
 			t = t<<1 | old;
 			mem_write_byte(get_HL(), t);
+
 			set_Z(!t);
-		break;
-		case 7:	/* A */
+			break;
+
+		case 7:
 			old = !!(c.A&0x80);
 			c.A = (c.A<<1) | old;
+
 			set_C(old);
 			set_Z(!c.A);
-		break;
+
+			break;
 	}
 
 	set_N(0);
 	set_H(0);
 }
 
-static void RRC(unsigned char reg)
-{
+static void RRC(unsigned char reg) {
 	unsigned char t, old;
 
-	switch(reg)
-	{
-		case 0:	/* B */
-			old = c.B&1;
+	switch(reg) {
+		case 0:
+			old = c.B & 1;
 			set_C(old);
+
 			c.B = c.B>>1 | old<<7;
 			set_Z(!c.B);
-		break;
-		case 1:	/* C */
-			old = c.C&1;
+
+			break;
+
+		case 1:
+			old = c.C & 1;
 			set_C(old);
+
 			c.C = c.C>>1 | old<<7;
 			set_Z(!c.C);
-		break;
-		case 2:	/* D */
-			old = c.D&1;
+			break;
+
+		case 2:
+			old = c.D & 1;
 			set_C(old);
+
 			c.D = c.D>>1 | old<<7;
 			set_Z(!c.D);
-		break;
-		case 3:	/* E */
-			old = c.E&1;
+			break;
+
+		case 3:
+			old = c.E & 1;
 			set_C(old);
+
 			c.E = c.E>>1 | old<<7;
 			set_Z(!c.E);
-		break;
-		case 4:	/* H */
-			old = c.H&1;
+			break;
+
+		case 4:
+			old = c.H & 1;
 			set_C(old);
+
 			c.H = c.H>>1 | old<<7;
 			set_Z(!c.H);
-		break;
-		case 5:	/* L */
-			old = c.L&1;
+			break;
+
+		case 5:
+			old = c.L & 1;
 			set_C(old);
 			c.L = c.L>>1 | old<<7;
 			set_Z(!c.L);
@@ -171,7 +194,7 @@ static void RRC(unsigned char reg)
 			set_Z(!t);
 		break;
 		case 7:	/* A */
-			old = c.A&1;
+			old = c.A & 1;
 			set_C(old);
 			c.A = c.A>>1 | old<<7;
 			set_Z(!c.A);
