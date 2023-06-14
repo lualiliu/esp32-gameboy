@@ -1,0 +1,13 @@
+#ifndef ESP32_GAMEBOY_H
+#define ESP32_GAMEBOY_H
+
+#define BTN_SELECT GPIO_NUM_15
+#define BTN_START GPIO_NUM_2
+#define BTN_A GPIO_NUM_0
+#define BTN_B GPIO_NUM_4
+#define BTN_UP GPIO_NUM_16
+#define BTN_DOWN GPIO_NUM_32
+#define BTN_LEFT GPIO_NUM_33
+#define BTN_RIGHT GPIO_NUM_26
+
+#endif
