@@ -1,27 +1,21 @@
 #include "SPI.h"
 #include "Adafruit_GFX.h"
-#include "Adafruit_ILI9341.h"
+#include "Adafruit_ST7735.h"
 
-#define _cs 22
-#define _dc 21
-#define _mosi 23
-#define _sclk 19
-#define _rst 18
-#define _miso 25
-#define _led 5
+#define TFT_CS -1
+#define TFT_DC 5
+#define TFT_RST 19
+#define TFT_MOSI 23
+#define TFT_SCLK 18
 
-Adafruit_ILI9341 tft = Adafruit_ILI9341(_cs, _dc, _mosi, _sclk, _rst, _miso);
-
-void backlighting(bool state) {
-    if(!state)
-        digitalWrite(_led, LOW);
-    else digitalWrite(_led, HIGH);
-}
+Adafruit_ST7735 tft = Adafruit_ST7735(TFT_CS, TFT_DC, TFT_RST);
 
 #define GAMEBOY_HEIGHT 160
 #define GAMEBOY_WIDTH 144
 
-static int button_start, button_select, button_a, button_b, button_down, button_up, button_left, button_right;
+static int button_start = 0, button_select = 0,
+  button_a = 0, button_b = 0,
+  button_down = 0, button_up = 0, button_left = 0, button_right = 0;
 
 byte pixels[GAMEBOY_HEIGHT * GAMEBOY_WIDTH / 4];
 byte getColorIndexFromFrameBuffer(int x, int y) {
@@ -40,52 +34,30 @@ void SDL_Flip(byte *screen) {
 }
 
 void sdl_init() {
-  tft.begin();
+  tft.initR(INITR_BLACKTAB);
+  tft.setRotation(3);
+  tft.fillScreen(ST77XX_RED);
 
-  pinMode(_led, OUTPUT);
-  backlighting(true);
-  
-  uint8_t x = tft.readcommand8(ILI9341_RDMODE);
-  Serial.print("Display Power Mode: 0x");
-  Serial.println(x, HEX);
-
-  x = tft.readcommand8(ILI9341_RDMADCTL);
-  Serial.print("MADCTL Mode: 0x");
-  Serial.println(x, HEX);
-
-  x = tft.readcommand8(ILI9341_RDPIXFMT);
-  Serial.print("Pixel Format: 0x");
-  Serial.println(x, HEX);
-
-  x = tft.readcommand8(ILI9341_RDIMGFMT);
-  Serial.print("Image Format: 0x");
-  Serial.println(x, HEX);
-
-  x = tft.readcommand8(ILI9341_RDSELFDIAG);
-  Serial.print("Self Diagnostic: 0x");
-  Serial.println(x, HEX); 
-
-  tft.fillScreen(ILI9341_RED);
-  gpio_pad_select_gpio(GPIO_NUM_14);
-  gpio_set_direction(GPIO_NUM_14, GPIO_MODE_INPUT);
+  gpio_pad_select_gpio(GPIO_NUM_15);
+  gpio_set_direction(GPIO_NUM_15, GPIO_MODE_INPUT);
 
   gpio_pad_select_gpio(GPIO_NUM_27);
   gpio_set_direction(GPIO_NUM_27, GPIO_MODE_INPUT);
 }
 
 int sdl_update() {
-    button_start = !gpio_get_level(GPIO_NUM_14);
-    button_right = !gpio_get_level(GPIO_NUM_27);
+  button_start = !gpio_get_level(GPIO_NUM_15);
+  button_right = !gpio_get_level(GPIO_NUM_27);
 
 	return 0;
 }
 
 unsigned int sdl_get_buttons() {
-	return (button_start*8) | (button_select*4) | (button_b*2) | button_a;
+	return (button_start * 8) | (button_select * 4) | (button_b * 2) | button_a;
 }
 
 unsigned int sdl_get_directions() {
-	return (button_down*8) | (button_up*4) | (button_left*2) | button_right;
+	return (button_down * 8) | (button_up * 4) | (button_left * 2) | button_right;
 }
 
 byte* sdl_get_framebuffer() {

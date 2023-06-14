@@ -10,6 +10,7 @@
             "includePath": [
                 "c:/Users/natha/Desktop/Projects/esp32-gameboy/include",
                 "c:/Users/natha/Desktop/Projects/esp32-gameboy/src",
+                "c:/Users/natha/Desktop/Projects/esp32-gameboy/.pio/libdeps/upesy_wroom/Adafruit ST7735 and ST7789 Library",
                 "c:/Users/natha/Desktop/Projects/esp32-gameboy/.pio/libdeps/upesy_wroom/Adafruit ILI9341",
                 "c:/Users/natha/Desktop/Projects/esp32-gameboy/.pio/libdeps/upesy_wroom/Adafruit GFX Library",
                 "c:/Users/natha/Desktop/Projects/esp32-gameboy/.pio/libdeps/upesy_wroom/Adafruit BusIO",
@@ -209,6 +210,7 @@
                 "C:/Users/natha/.platformio/packages/framework-arduinoespressif32/variants/uPesy_esp32_wroom_devkit",
                 "c:/Users/natha/Desktop/Projects/esp32-gameboy/.pio/libdeps/upesy_wroom/Adafruit STMPE610",
                 "c:/Users/natha/Desktop/Projects/esp32-gameboy/.pio/libdeps/upesy_wroom/Adafruit TouchScreen",
+                "c:/Users/natha/Desktop/Projects/esp32-gameboy/.pio/libdeps/upesy_wroom/Adafruit seesaw Library",
                 "C:/Users/natha/.platformio/packages/framework-arduinoespressif32/libraries/ArduinoOTA/src",
                 "C:/Users/natha/.platformio/packages/framework-arduinoespressif32/libraries/AsyncUDP/src",
                 "C:/Users/natha/.platformio/packages/framework-arduinoespressif32/libraries/BLE/src",
@@ -247,6 +249,7 @@
                 "path": [
                     "c:/Users/natha/Desktop/Projects/esp32-gameboy/include",
                     "c:/Users/natha/Desktop/Projects/esp32-gameboy/src",
+                    "c:/Users/natha/Desktop/Projects/esp32-gameboy/.pio/libdeps/upesy_wroom/Adafruit ST7735 and ST7789 Library",
                     "c:/Users/natha/Desktop/Projects/esp32-gameboy/.pio/libdeps/upesy_wroom/Adafruit ILI9341",
                     "c:/Users/natha/Desktop/Projects/esp32-gameboy/.pio/libdeps/upesy_wroom/Adafruit GFX Library",
                     "c:/Users/natha/Desktop/Projects/esp32-gameboy/.pio/libdeps/upesy_wroom/Adafruit BusIO",
@@ -446,6 +449,7 @@
                     "C:/Users/natha/.platformio/packages/framework-arduinoespressif32/variants/uPesy_esp32_wroom_devkit",
                     "c:/Users/natha/Desktop/Projects/esp32-gameboy/.pio/libdeps/upesy_wroom/Adafruit STMPE610",
                     "c:/Users/natha/Desktop/Projects/esp32-gameboy/.pio/libdeps/upesy_wroom/Adafruit TouchScreen",
+                    "c:/Users/natha/Desktop/Projects/esp32-gameboy/.pio/libdeps/upesy_wroom/Adafruit seesaw Library",
                     "C:/Users/natha/.platformio/packages/framework-arduinoespressif32/libraries/ArduinoOTA/src",
                     "C:/Users/natha/.platformio/packages/framework-arduinoespressif32/libraries/AsyncUDP/src",
                     "C:/Users/natha/.platformio/packages/framework-arduinoespressif32/libraries/BLE/src",
