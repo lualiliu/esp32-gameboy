@@ -10,7 +10,10 @@
             "includePath": [
                 "c:/Users/natha/Desktop/Projects/esp32-gameboy/include",
                 "c:/Users/natha/Desktop/Projects/esp32-gameboy/src",
+                "c:/Users/natha/Desktop/Projects/esp32-gameboy/.pio/libdeps/upesy_wroom/Adafruit GFX Library",
+                "c:/Users/natha/Desktop/Projects/esp32-gameboy/.pio/libdeps/upesy_wroom/Adafruit BusIO",
                 "C:/Users/natha/.platformio/packages/framework-arduinoespressif32/libraries/SPI/src",
+                "C:/Users/natha/.platformio/packages/framework-arduinoespressif32/libraries/Wire/src",
                 "C:/Users/natha/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/newlib/platform_include",
                 "C:/Users/natha/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/freertos/include",
                 "C:/Users/natha/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/freertos/include/esp_additions/freertos",
@@ -234,7 +237,6 @@
                 "C:/Users/natha/.platformio/packages/framework-arduinoespressif32/libraries/WiFi/src",
                 "C:/Users/natha/.platformio/packages/framework-arduinoespressif32/libraries/WiFiClientSecure/src",
                 "C:/Users/natha/.platformio/packages/framework-arduinoespressif32/libraries/WiFiProv/src",
-                "C:/Users/natha/.platformio/packages/framework-arduinoespressif32/libraries/Wire/src",
                 ""
             ],
             "browse": {
@@ -242,7 +244,10 @@
                 "path": [
                     "c:/Users/natha/Desktop/Projects/esp32-gameboy/include",
                     "c:/Users/natha/Desktop/Projects/esp32-gameboy/src",
+                    "c:/Users/natha/Desktop/Projects/esp32-gameboy/.pio/libdeps/upesy_wroom/Adafruit GFX Library",
+                    "c:/Users/natha/Desktop/Projects/esp32-gameboy/.pio/libdeps/upesy_wroom/Adafruit BusIO",
                     "C:/Users/natha/.platformio/packages/framework-arduinoespressif32/libraries/SPI/src",
+                    "C:/Users/natha/.platformio/packages/framework-arduinoespressif32/libraries/Wire/src",
                     "C:/Users/natha/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/newlib/platform_include",
                     "C:/Users/natha/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/freertos/include",
                     "C:/Users/natha/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/freertos/include/esp_additions/freertos",
@@ -466,7 +471,6 @@
                     "C:/Users/natha/.platformio/packages/framework-arduinoespressif32/libraries/WiFi/src",
                     "C:/Users/natha/.platformio/packages/framework-arduinoespressif32/libraries/WiFiClientSecure/src",
                     "C:/Users/natha/.platformio/packages/framework-arduinoespressif32/libraries/WiFiProv/src",
-                    "C:/Users/natha/.platformio/packages/framework-arduinoespressif32/libraries/Wire/src",
                     ""
                 ]
             },
