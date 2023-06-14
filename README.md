@@ -35,6 +35,8 @@ To get started with the emulator, follow these steps:
 
 ## Schematics
 
+In order to run the system correctly, double check the wirings if it is properly connected as indicated below.
+
 |  ILI9163 LCD  | ESP32 |
 |---------------|-------|
 | VCC           | 3.3V  |
@@ -45,6 +47,17 @@ To get started with the emulator, follow these steps:
 | SDA           | IO23  |
 | SCK           | IO18  |
 | LED           | 3.3V  |
+
+All buttons should be connected on the GND, while on the other side must be connected to the list below:
+
+- *Select button* - GPIO15
+- *Start button* - GPIO2
+- *A* - GPIO0
+- *B* - GPIO4
+- *Up* - GPIO16
+- *Down* - GPIO32
+- *Left* - GPIO33
+- *Right* - GPIO26
 
 ## Configuration
 
