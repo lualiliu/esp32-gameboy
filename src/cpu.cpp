@@ -69,34 +69,34 @@ static void RLC(unsigned char reg) {
 			break;
 
 		case 1:
-			old = !!(c.C&0x80);
+			old = !!(c.C & 0x80);
 			set_C(old);
 
-			c.C = c.C<<1 | old;
+			c.C = c.C << 1 | old;
 			set_Z(!c.C);
 			break;
 
 		case 2:
-			old = !!(c.D&0x80);
+			old = !!(c.D & 0x80);
 			set_C(old);
 
-			c.D = c.D<<1 | old;
+			c.D = c.D << 1 | old;
 			set_Z(!c.D);
 			break;
 
 		case 3:
-			old = !!(c.E&0x80);
+			old = !!(c.E & 0x80);
 			set_C(old);
 
-			c.E = c.E<<1 | old;
+			c.E = c.E << 1 | old;
 			set_Z(!c.E);
 			break;
 
 		case 4:
-			old = !!(c.H&0x80);
+			old = !!(c.H & 0x80);
 			set_C(old);
 
-			c.H = c.H<<1 | old;
+			c.H = c.H << 1 | old;
 			set_Z(!c.H);
 			break;
 
@@ -104,24 +104,24 @@ static void RLC(unsigned char reg) {
 			old = !!(c.L&0x80);
 			set_C(old);
 
-			c.L = c.L<<1 | old;
+			c.L = c.L << 1 | old;
 			set_Z(!c.L);
 			break;
 
 		case 6:
 			t = mem_get_byte(get_HL());
-			old = !!(t&0x80);
+			old = !!(t & 0x80);
 			set_C(old);
 
-			t = t<<1 | old;
+			t = t << 1 | old;
 			mem_write_byte(get_HL(), t);
 
 			set_Z(!t);
 			break;
 
 		case 7:
-			old = !!(c.A&0x80);
-			c.A = (c.A<<1) | old;
+			old = !!(c.A & 0x80);
+			c.A = (c.A << 1) | old;
 
 			set_C(old);
 			set_Z(!c.A);
@@ -141,16 +141,15 @@ static void RRC(unsigned char reg) {
 			old = c.B & 1;
 			set_C(old);
 
-			c.B = c.B>>1 | old<<7;
+			c.B = c.B >> 1 | old << 7;
 			set_Z(!c.B);
-
 			break;
 
 		case 1:
 			old = c.C & 1;
 			set_C(old);
 
-			c.C = c.C>>1 | old<<7;
+			c.C = c.C >> 1 | old << 7;
 			set_Z(!c.C);
 			break;
 
@@ -158,7 +157,7 @@ static void RRC(unsigned char reg) {
 			old = c.D & 1;
 			set_C(old);
 
-			c.D = c.D>>1 | old<<7;
+			c.D = c.D >> 1 | old << 7;
 			set_Z(!c.D);
 			break;
 
@@ -166,7 +165,7 @@ static void RRC(unsigned char reg) {
 			old = c.E & 1;
 			set_C(old);
 
-			c.E = c.E>>1 | old<<7;
+			c.E = c.E >> 1 | old << 7;
 			set_Z(!c.E);
 			break;
 
@@ -174,48 +173,55 @@ static void RRC(unsigned char reg) {
 			old = c.H & 1;
 			set_C(old);
 
-			c.H = c.H>>1 | old<<7;
+			c.H = c.H >> 1 | old << 7;
 			set_Z(!c.H);
 			break;
 
 		case 5:
 			old = c.L & 1;
 			set_C(old);
-			c.L = c.L>>1 | old<<7;
+
+			c.L = c.L >> 1 | old << 7;
 			set_Z(!c.L);
-		break;
-		case 6:	/* (HL) */
+			break;
+
+		case 6:
 			t = mem_get_byte(get_HL());
 			old = t;
 			set_C(old);
-			t = t>>1 | old<<7;
+
+			t = t >> 1 | old << 7;
 			c.cycles += 2;
+
 			mem_write_byte(get_HL(), t);
 			set_Z(!t);
-		break;
-		case 7:	/* A */
+			break;
+
+		case 7:
 			old = c.A & 1;
 			set_C(old);
-			c.A = c.A>>1 | old<<7;
+
+			c.A = c.A >> 1 | old << 7;
 			set_Z(!c.A);
-		break;
+			break;
 	}
+
 	set_N(0);
 	set_H(0);
 }
 
-static void RL(unsigned char reg)
-{
+static void RL(unsigned char reg) {
 	unsigned char t, t2;
 
-	switch(reg)
-	{
-		case 0: /* B */
+	switch(reg) {
+		case 0:
 			t2 = flag_C;
 			set_C(!!(c.B&0x80));
+
 			c.B = (c.B << 1) | !!(t2);
 			set_Z(!c.B);
-		break;
+			break;
+
 		case 1: /* C */
 			t2 = flag_C;
 			set_C(!!(c.C&0x80));
