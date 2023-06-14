@@ -30,8 +30,21 @@ To get started with the emulator, follow these steps:
 1. Clone this repository to your local machine or download it as a ZIP file.
 2. Open the extracted project folder in Visual Studio Code.
 3. Connect your ESP32 board to your computer.
-4. Follow the [schematic diagram](schematics) to wire up.
+4. Follow the [schematics](#schematics) to wire up.
 5. Upload the compiled code to your ESP32 by clicking the PlatformIO upload button or using the `platformio run --target upload` command in the terminal.
+
+## Schematics
+
+|  ILI9163 LCD  | ESP32 |
+|---------------|-------|
+| VCC           | 3.3V  |
+| GND           | GND   |
+| CS            | GND   |
+| RESET         | IO19  |
+| A0 (DC)       | IO5   |
+| SDA           | IO23  |
+| SCK           | IO18  |
+| LED           | 3.3V  |
 
 ## Configuration
 
