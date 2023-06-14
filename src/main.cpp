@@ -7,11 +7,11 @@
 #include "gbrom.h"
 
 void setup() {
-  int r = rom_init(gb_rom);
+    rom_init(gb_rom);
 
-  sdl_init();
-  mem_init();
-  cpu_init();
+    sdl_init();
+    mem_init();
+    cpu_init();
 }
 
 void loop() {

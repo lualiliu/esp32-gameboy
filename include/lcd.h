@@ -1,8 +1,8 @@
 #ifndef LCD_H
 #define LCD_H
 
-int lcd_cycle(void);
-int lcd_get_line(void);
+int lcd_cycle();
+int lcd_get_line();
 
 unsigned char lcd_get_stat();
 

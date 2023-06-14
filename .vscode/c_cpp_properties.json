@@ -8,8 +8,9 @@
         {
             "name": "PlatformIO",
             "includePath": [
-                "c:/Users/natha/Documents/PlatformIO/Projects/esp32-gameboy/include",
-                "c:/Users/natha/Documents/PlatformIO/Projects/esp32-gameboy/src",
+                "c:/Users/natha/Desktop/Projects/esp32-gameboy/include",
+                "c:/Users/natha/Desktop/Projects/esp32-gameboy/src",
+                "C:/Users/natha/.platformio/packages/framework-arduinoespressif32/libraries/SPI/src",
                 "C:/Users/natha/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/newlib/platform_include",
                 "C:/Users/natha/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/freertos/include",
                 "C:/Users/natha/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/freertos/include/esp_additions/freertos",
@@ -224,7 +225,6 @@
                 "C:/Users/natha/.platformio/packages/framework-arduinoespressif32/libraries/RainMaker/src",
                 "C:/Users/natha/.platformio/packages/framework-arduinoespressif32/libraries/SD/src",
                 "C:/Users/natha/.platformio/packages/framework-arduinoespressif32/libraries/SD_MMC/src",
-                "C:/Users/natha/.platformio/packages/framework-arduinoespressif32/libraries/SPI/src",
                 "C:/Users/natha/.platformio/packages/framework-arduinoespressif32/libraries/SPIFFS/src",
                 "C:/Users/natha/.platformio/packages/framework-arduinoespressif32/libraries/SimpleBLE/src",
                 "C:/Users/natha/.platformio/packages/framework-arduinoespressif32/libraries/Ticker/src",
@@ -240,8 +240,9 @@
             "browse": {
                 "limitSymbolsToIncludedHeaders": true,
                 "path": [
-                    "c:/Users/natha/Documents/PlatformIO/Projects/esp32-gameboy/include",
-                    "c:/Users/natha/Documents/PlatformIO/Projects/esp32-gameboy/src",
+                    "c:/Users/natha/Desktop/Projects/esp32-gameboy/include",
+                    "c:/Users/natha/Desktop/Projects/esp32-gameboy/src",
+                    "C:/Users/natha/.platformio/packages/framework-arduinoespressif32/libraries/SPI/src",
                     "C:/Users/natha/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/newlib/platform_include",
                     "C:/Users/natha/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/freertos/include",
                     "C:/Users/natha/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/freertos/include/esp_additions/freertos",
@@ -456,7 +457,6 @@
                     "C:/Users/natha/.platformio/packages/framework-arduinoespressif32/libraries/RainMaker/src",
                     "C:/Users/natha/.platformio/packages/framework-arduinoespressif32/libraries/SD/src",
                     "C:/Users/natha/.platformio/packages/framework-arduinoespressif32/libraries/SD_MMC/src",
-                    "C:/Users/natha/.platformio/packages/framework-arduinoespressif32/libraries/SPI/src",
                     "C:/Users/natha/.platformio/packages/framework-arduinoespressif32/libraries/SPIFFS/src",
                     "C:/Users/natha/.platformio/packages/framework-arduinoespressif32/libraries/SimpleBLE/src",
                     "C:/Users/natha/.platformio/packages/framework-arduinoespressif32/libraries/Ticker/src",

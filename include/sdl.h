@@ -3,15 +3,15 @@
 
 #include <Arduino.h>
 
-int sdl_update(void);
+int sdl_update();
 
-void sdl_init(void);
-void sdl_frame(void);
-void sdl_quit(void);
+void sdl_init();
+void sdl_frame();
+void sdl_quit();
 
-byte* sdl_get_framebuffer(void);
+byte* sdl_get_framebuffer();
 
-unsigned int sdl_get_buttons(void);
-unsigned int sdl_get_directions(void);
+unsigned int sdl_get_buttons();
+unsigned int sdl_get_directions();
 
 #endif
