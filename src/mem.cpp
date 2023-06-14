@@ -9,7 +9,6 @@
 #include "sdl.h"
 #include "cpu.h"
 
-
 static unsigned char *mem;
 static int DMA_pending = 0;
 static int joypad_select_buttons, joypad_select_directions;
@@ -198,8 +197,7 @@ void mem_write_word(unsigned short d, unsigned short i)
 	mem[d+1] = i>>8;
 }
 
-void mem_init(void)
-{
+void mem_init() {
 	const unsigned char *bytes = rom_getbytes();
 
 	mem = (unsigned char *)calloc(1, 0x10000);
