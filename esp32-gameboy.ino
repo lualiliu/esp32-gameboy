@@ -6,9 +6,14 @@
 #include "lcd.h"
 #include "mem.h"
 #include "rom.h"
-#include "sd.h"
 #include "sdl.h"
 #include "timer.h"
+
+#include <WiFi.h>
+#include <ArduinoOTA.h>
+
+const char* ssid = "YOUR_SSID";
+const char* password = "YOUR_PASSWORD";
 
 static constexpr uint32_t emulator_cpu_freq = 4200000 / 4;
 static constexpr uint32_t frames_per_sec = 60;
@@ -17,14 +22,30 @@ static uint32_t cycles_per_frame = 0;
 static uint32_t cycles_in_micro_sec = 0;
 
 void setup() {
+
+  Serial.begin(115200);
+
   int r = rom_init(gb_rom);
 
   sdl_init();
-  sd_init();
 
   gameboy_mem_init();
 
   cpu_init();
+
+  WiFi.begin(ssid, password);
+
+  while (WiFi.status() != WL_CONNECTED) {
+    delay(500);
+    Serial.print(".");
+  }
+
+  Serial.println();
+  Serial.print("IP: ");
+  Serial.println(WiFi.localIP());
+
+  ArduinoOTA.setHostname("ESP32-GameBoy");
+  ArduinoOTA.begin();
 
   cpu_freq = getCpuFrequencyMhz();
   printf("CPU Freq = %u Mhz\n", cpu_freq);
@@ -36,11 +57,14 @@ void setup() {
          cycles_in_micro_sec);
 }
 
-#define PERF_REPORT
+// PERF_REPORT is useful while profiling, but it adds debug code and strings.
+// Leave it disabled for ESP32-WROOM 4MB flash builds with OTA enabled.
+// #define PERF_REPORT
 
 #define REPORT_INTERVAL 60
 
 void loop() {
+  ArduinoOTA.handle();
   bool screen_updated = false;
 #ifdef PERF_REPORT
   uint32_t loop_start = ESP.getCycleCount();
@@ -74,6 +98,11 @@ void loop() {
   uint32_t emulator_cpu_cycle = 0;
 
   while (!screen_updated) {
+    static uint16_t ota_tick = 0;
+    if ((++ota_tick & 0x07ff) == 0) {
+      ArduinoOTA.handle();
+    }
+
 #ifdef PERF_REPORT
     auto pc = cpu_get_pc();
     unsigned char opcode = mem_get_byte(pc);
