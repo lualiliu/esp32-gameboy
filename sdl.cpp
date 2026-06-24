@@ -23,9 +23,22 @@
 #define _a GPIO_NUM_33
 #define _b GPIO_NUM_32
 
-Arduino_DataBus *bus = new Arduino_ESP32SPI(_dc);
-// Arduino_DataBus *bus = new Arduino_ESP32SPI(_dc, _cs, _sclk, _mosi, _miso);
-Arduino_GFX *tft = new Arduino_ILI9341(bus, _rst, 3 /* rotation */);
+Arduino_DataBus *bus =
+    new Arduino_ESP32SPI(
+        _dc,
+        _cs,
+        _sclk,
+        _mosi,
+        GFX_NOT_DEFINED);
+
+Arduino_GFX *tft =
+    new Arduino_ST7735(
+        bus,
+        _rst,
+        1,
+        false,
+        128,
+        160);
 
 void backlighting(bool state) {
   if (!state) {
@@ -39,10 +52,10 @@ void backlighting(bool state) {
 #define GAMEBOY_WIDTH 160
 #define DRAW_HEIGHT 144
 #define DRAW_WIDTH 160
-#define SCREEN_HEIGHT 240
-#define SCREEN_WIDTH 320
+#define SCREEN_HEIGHT 128
+#define SCREEN_WIDTH 160
 
-#define SPI_FREQ 40000000
+#define SPI_FREQ 27000000
 
 static uint8_t *frame_buffer;
 
@@ -71,8 +84,12 @@ void draw_button(bool value, int x_pos, int y_pos,
 }
 
 void draw_task(void *parameter) {
-  uint16_t color_palette[] = {0xffff, (16 << 11) + (32 << 5) + 16,
-                              (8 << 11) + (16 << 5) + 8, 0x0000};
+  uint16_t color_palette[] = {
+    0xFFFF, // white
+    0xC618, // light gray
+    0x7BEF, // dark gray
+    0x0000  // black
+  };
 
   int h_offset = (SCREEN_WIDTH - DRAW_WIDTH) / 2;
   int v_offset = (SCREEN_HEIGHT - DRAW_HEIGHT) / 2;
@@ -83,16 +100,17 @@ void draw_task(void *parameter) {
     frame_ready = false;
     tft->drawIndexedBitmap(h_offset, v_offset, frame_buffer, color_palette,
                            DRAW_WIDTH, DRAW_HEIGHT);
-    draw_button(button_up, 30, SCREEN_HEIGHT / 2 - 15);
-    draw_button(button_left, 15, SCREEN_HEIGHT / 2);
-    draw_button(button_right, 45, SCREEN_HEIGHT / 2);
-    draw_button(button_down, 30, SCREEN_HEIGHT / 2 + 15);
+    //   draw_button(button_up, 30, SCREEN_HEIGHT / 2 - 15);
+    //   draw_button(button_left, 15, SCREEN_HEIGHT / 2);
+    //   draw_button(button_right, 45, SCREEN_HEIGHT / 2);
+    //   draw_button(button_down, 30, SCREEN_HEIGHT / 2 + 15);
 
-    draw_button(button_select, 30, SCREEN_HEIGHT / 2 + 70, "select");
-    draw_button(button_start, SCREEN_WIDTH - 30, SCREEN_HEIGHT / 2 + 70,
-                "start");
-    draw_button(button_a, SCREEN_WIDTH - 45, SCREEN_HEIGHT / 2, "a");
-    draw_button(button_b, SCREEN_WIDTH - 15, SCREEN_HEIGHT / 2 - 15, "b");
+    //   draw_button(button_select, 30, SCREEN_HEIGHT / 2 + 70, "select");
+    //   draw_button(button_start, SCREEN_WIDTH - 30, SCREEN_HEIGHT / 2 + 70,
+    //               "start");
+    //   draw_button(button_a, SCREEN_WIDTH - 45, SCREEN_HEIGHT / 2, "a");
+    //   draw_button(button_b, SCREEN_WIDTH - 15, SCREEN_HEIGHT / 2 - 15, "b");
+    //
   }
 }
 
